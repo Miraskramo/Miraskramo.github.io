@@ -1,8 +1,45 @@
-javascript:(function(){
-    var urls = [
-        "https://zh.wikipedia.org/wiki/Special:Random",
-        "https://en.wikipedia.org/wiki/Special:Random",
-        "https://ja.wikipedia.org/wiki/Special:Random"
-    ];
-    window.location.href = urls[Math.floor(Math.random() * urls.length)];
-})();
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隨機 Wikipedia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background-color: #0078D4;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #005A9E;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>隨機 Wikipedia 頁面</h1>
+    <p>點擊按鈕，隨機打開中文、英文或日文的 Wikipedia 頁面！</p>
+    <button onclick="openRandomWiki()">打開隨機頁面</button>
+
+    <script>
+        function openRandomWiki() {
+            var urls = [
+                "https://zh.wikipedia.org/wiki/Special:Random", // 中文
+                "https://en.wikipedia.org/wiki/Special:Random", // 英文
+                "https://ja.wikipedia.org/wiki/Special:Random"  // 日文
+            ];
+            window.location.href = urls[Math.floor(Math.random() * urls.length)];
+        }
+    </script>
+
+</body>
+</html>
