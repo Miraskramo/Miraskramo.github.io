@@ -3,43 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>隨機 Wikipedia</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        button {
-            font-size: 20px;
-            padding: 10px 20px;
-            cursor: pointer;
-            border: none;
-            background-color: #0078D4;
-            color: white;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #005A9E;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>隨機 Wikipedia 頁面</h1>
-    <p>點擊按鈕，隨機打開中文、英文或日文的 Wikipedia 頁面！</p>
-    <button onclick="openRandomWiki()">打開隨機頁面</button>
-
+    <title>隨機跳轉 Wikipedia</title>
     <script>
-        function openRandomWiki() {
+        (function(){
             var urls = [
                 "https://zh.wikipedia.org/wiki/Special:Random", // 中文
                 "https://en.wikipedia.org/wiki/Special:Random", // 英文
                 "https://ja.wikipedia.org/wiki/Special:Random"  // 日文
             ];
             window.location.href = urls[Math.floor(Math.random() * urls.length)];
-        }
+        })();
     </script>
-
+</head>
+<body>
+    <p>如果沒有自動跳轉，請 <a id="manualLink" href="#">點此手動跳轉</a>。</p>
+    <script>
+        document.getElementById("manualLink").href = window.location.href;
+    </script>
 </body>
 </html>
