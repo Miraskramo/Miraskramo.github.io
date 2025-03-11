@@ -1,0 +1,8 @@
+javascript:(function(){
+    var urls = [
+        "https://zh.wikipedia.org/wiki/Special:Random",
+        "https://en.wikipedia.org/wiki/Special:Random",
+        "https://ja.wikipedia.org/wiki/Special:Random"
+    ];
+    window.location.href = urls[Math.floor(Math.random() * urls.length)];
+})();
