@@ -9,20 +9,29 @@
     <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png">
     
     <script>
-        (function(){
+        function redirectToRandomWiki() {
             var urls = [
                 "https://zh.wikipedia.org/wiki/Special:Random", // 中文
                 "https://en.wikipedia.org/wiki/Special:Random", // 英文
                 "https://ja.wikipedia.org/wiki/Special:Random"  // 日文
             ];
-            window.location.href = urls[Math.floor(Math.random() * urls.length)];
-        })();
+            var randomUrl = urls[Math.floor(Math.random() * urls.length)];
+            window.location.href = randomUrl;
+        }
+
+        // 5秒後自動跳轉
+        setTimeout(redirectToRandomWiki, 5000);
     </script>
 </head>
 <body>
-    <p>如果沒有自動跳轉，請 <a id="manualLink" href="#">點此手動跳轉</a>。</p>
+    <h1>即將跳轉到 Wikipedia 隨機頁面</h1>
+    <p>5 秒後會自動跳轉，如未跳轉請 <a id="manualLink" href="#">點此手動跳轉</a>。</p>
+    
     <script>
-        document.getElementById("manualLink").href = window.location.href;
+        document.getElementById("manualLink").addEventListener("click", function(event) {
+            event.preventDefault(); // 防止默認行為
+            redirectToRandomWiki(); // 手動跳轉
+        });
     </script>
 </body>
 </html>
