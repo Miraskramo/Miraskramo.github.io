@@ -10,15 +10,17 @@
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
             text-align: center;
-            margin: 50px;
+            margin: 20px;
         }
         form {
             background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
+            display: block;
             text-align: left;
+            max-width: 400px;
+            margin: auto;
         }
         fieldset {
             margin-bottom: 15px;
@@ -38,12 +40,17 @@
             color: white;
             border: none;
             padding: 10px 15px;
-            margin: 5px;
+            margin: 5px 0;
             border-radius: 5px;
             cursor: pointer;
+            width: 100%;
         }
         button:hover {
             background-color: #0056b3;
+        }
+        label {
+            display: block;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -89,9 +96,9 @@
             let countryOptions = document.querySelectorAll("input[name='country']:checked");
             let customLanguage = document.getElementById("customLanguage").value.trim();
             let customCountry = document.getElementById("customCountry").value.trim();
-
+            
             let searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-
+            
             let languages = Array.from(languageOptions).map(option => option.value);
             if (customLanguage) {
                 languages = languages.concat(customLanguage.split(',').map(lang => `lang_${lang.trim()}`));
@@ -100,18 +107,18 @@
             if (customCountry) {
                 countries = countries.concat(customCountry.split(',').map(cn => `country${cn.trim().toUpperCase()}`));
             }
-
+            
             if (languages.length > 0) {
                 searchUrl += `&lr=${languages.join('|')}`;
             }
             if (countries.length > 0) {
                 searchUrl += `&cr=${countries.join('|')}`;
             }
-
+            
             window.open(searchUrl, "_blank");
             return false;
         }
-
+        
         function clearForm() {
             document.getElementById("query").value = "";
             document.querySelectorAll("input[type='checkbox']").forEach(checkbox => checkbox.checked = false);
