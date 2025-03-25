@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google 搜尋</title>
+    <link rel="icon" href="https://www.google.com/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            margin: 50px;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: left;
+        }
+        fieldset {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Google 搜尋</h2>
+    <form id="searchForm" onsubmit="return searchGoogle()">
+        <label for="query">搜尋內容：</label>
+        <input type="text" id="query" required>
+        <br>
+        <fieldset>
+            <legend>語言：</legend>
+            <label><input type="checkbox" name="language" value="lang_zh-TW"> 繁體中文</label>
+            <label><input type="checkbox" name="language" value="lang_zh-CN"> 简体中文</label>
+            <label><input type="checkbox" name="language" value="lang_en"> English</label>
+            <label><input type="checkbox" name="language" value="lang_ja"> 日本語</label>
+            <label><input type="checkbox" name="language" value="lang_ko"> 한국어</label>
+            <br>
+            <label>語言代碼 (逗號分隔)：</label>
+            <input type="text" id="customLanguage">
+        </fieldset>
+        <fieldset>
+            <legend>區域：</legend>
+            <label><input type="checkbox" name="country" value="countryCN"> 中国</label>
+            <label><input type="checkbox" name="country" value="countryHK"> 香港</label>
+            <label><input type="checkbox" name="country" value="countryMO"> 澳門</label>
+            <label><input type="checkbox" name="country" value="countryTW"> 台灣</label>
+            <label><input type="checkbox" name="country" value="countryJP"> 日本</label>
+            <label><input type="checkbox" name="country" value="countryKR"> 한국</label>
+            <label><input type="checkbox" name="country" value="countryUS"> U.S.</label>
+            <label><input type="checkbox" name="country" value="countryGB"> U.K.</label>
+            <br>
+            <label>區域代碼 (逗號分隔)：</label>
+            <input type="text" id="customCountry">
+        </fieldset>
+        <button type="submit">搜尋</button>
+        <button type="button" onclick="clearForm()">清除</button>
+    </form>
+
+    <script>
+        function searchGoogle() {
+            let query = document.getElementById("query").value;
+            let languageOptions = document.querySelectorAll("input[name='language']:checked");
+            let countryOptions = document.querySelectorAll("input[name='country']:checked");
+            let customLanguage = document.getElementById("customLanguage").value.trim();
+            let customCountry = document.getElementById("customCountry").value.trim();
+
+            let searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+
+            let languages = Array.from(languageOptions).map(option => option.value);
+            if (customLanguage) {
+                languages = languages.concat(customLanguage.split(',').map(lang => `lang_${lang.trim()}`));
+            }
+            let countries = Array.from(countryOptions).map(option => option.value);
+            if (customCountry) {
+                countries = countries.concat(customCountry.split(',').map(cn => `country${cn.trim().toUpperCase()}`));
+            }
+
+            if (languages.length > 0) {
+                searchUrl += `&lr=${languages.join('|')}`;
+            }
+            if (countries.length > 0) {
+                searchUrl += `&cr=${countries.join('|')}`;
+            }
+
+            window.open(searchUrl, "_blank");
+            return false;
+        }
+
+        function clearForm() {
+            document.getElementById("query").value = "";
+            document.querySelectorAll("input[type='checkbox']").forEach(checkbox => checkbox.checked = false);
+            document.getElementById("customLanguage").value = "";
+            document.getElementById("customCountry").value = "";
+        }
+    </script>
+</body>
+</html>
