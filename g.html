@@ -49,8 +49,7 @@
             background-color: #0056b3;
         }
         label {
-            display: block;
-            margin-top: 5px;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -67,9 +66,7 @@
             <label><input type="checkbox" name="language" value="lang_en"> English</label>
             <label><input type="checkbox" name="language" value="lang_ja"> 日本語</label>
             <label><input type="checkbox" name="language" value="lang_ko"> 한국어</label>
-            <br>
-            <label>語言代碼 (逗號分隔)：</label>
-            <input type="text" id="customLanguage">
+            <label>語言代碼 (逗號分隔)：<input type="text" id="customLanguage"></label>
         </fieldset>
         <fieldset>
             <legend>區域：</legend>
@@ -81,9 +78,7 @@
             <label><input type="checkbox" name="country" value="countryKR"> 한국</label>
             <label><input type="checkbox" name="country" value="countryUS"> U.S.</label>
             <label><input type="checkbox" name="country" value="countryGB"> U.K.</label>
-            <br>
-            <label>區域代碼 (逗號分隔)：</label>
-            <input type="text" id="customCountry">
+            <label>區域代碼 (逗號分隔)：<input type="text" id="customCountry"></label>
         </fieldset>
         <button type="submit">搜尋</button>
         <button type="button" onclick="clearForm()">清除</button>
